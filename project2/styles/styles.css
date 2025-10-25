@@ -1,0 +1,809 @@
+/*
+filename: [Project 1]
+author: [DANIEL YONG TZE MING, NGOI YE SHENG, TAN QIAO EN, WONG JOE YEE]
+created: [7 September 2025]
+last modified: [21 September 2025]
+description: [index.html, jobs.html, apply.html, about.html]
+*/
+
+/*===========================================================================*/
+/* CSS - INDEX.HTML */
+/* -------- Navigation -------- */
+.index-page nav a {
+    text-decoration: underline;
+    color: white;
+    font-weight: bold;
+    margin: 0 5px;
+    animation: fadeIn 4s ease-out;
+}
+
+.index-page nav a:hover {
+    color: lightsteelblue;
+}
+
+.index-title h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0; 
+    padding-top: 3em; /* space on top */
+    padding-bottom: 0.25em; /* space below the words */
+    font-family:  "Arial", sans-serif;
+    font-size: 4.5em;
+    font-weight: 700;
+    letter-spacing: -1.75px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(270deg,blue,darkorange,purple,lightskyblue);
+    background-size: 400%;
+    background-clip: text;
+    color: transparent;
+    animation: text-animation 10s linear infinite; /* runs indefinitely */
+}
+
+@keyframes text-animation { /* alternates between the colors stated */
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 400%;
+    }
+}
+
+.index-title h3 {
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family:  "Arial", sans-serif;
+    font-size: 3em;
+    font-weight: 550;
+    letter-spacing: -1.75px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(270deg,blue,lightskyblue);
+    background-size: 400%;
+    background-clip: text;
+    color: transparent;
+    animation: text-animationh3 10s infinite linear;
+}
+
+@keyframes text-animationh3 {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 400%;
+    }
+}
+
+.sec-title {
+    display: block;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 1.2em;
+    color: lightblue;
+    font-weight: 500;
+    margin-top: 20em;
+    margin-bottom: 3em;
+}
+
+.small-title {
+    display: block;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 1.1em;
+    color: lightblue;
+    font-weight: 500;
+    margin-top: 2em;
+}
+
+.third-title {
+    display: block;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 1.2em;
+    color: lightgray;
+    font-weight: 500;
+}
+
+.job-lists {
+    font-family: "Arial", sans-serif;
+    font-size: 1.5em;
+    color: navy;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    max-width: 600px;
+    list-style-type: none;
+    text-align: center;
+    background: linear-gradient(270deg, blue,lightskyblue);
+    background-size: 400%;
+    border-radius: 100%;
+    border: 8px double lightgray;
+    /* Combine animations */
+    animation: bounce 6s infinite ease-in-out, border-animation 10s infinite linear;
+}
+
+@keyframes bounce { /* moves text up and down */
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes border-animation {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 400%;
+    }
+}
+
+.index-button {
+    display: block; /* make the button sits at the center of the page */
+    text-align: center;
+    margin: 3% auto; /* centers horizontally */
+    padding: 1% 2%;
+    background:url(styles/images/fade.jpg);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px lightblue;
+    font-size: 1em;
+    max-width: fit-content; /* prevent streching over the page */
+    cursor: pointer;
+}
+
+
+.index-button:hover /*when cursor move, it changed color*/ {
+    background:url(styles/images/fade2.jpg);
+    background-size: cover;
+}
+
+.last-title {
+    font-family: "Arial", sans-serif;
+    font-size: 2em;
+    background: linear-gradient(270deg,lightblue,navy,lightskyblue);
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    animation: spotlightFocus 3s ease-out infinite; /* appearance effects */
+    animation-delay: 0.5s;
+}
+
+@keyframes spotlightFocus { /* changes opacity, width, height and brightness */
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: brightness(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/*===========================================================================*/
+/* CSS - JOBS.HTML */
+/*qiaoen's part*/
+header {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    padding: 0%;
+    flex-wrap: wrap; /* wrap to make sure the fluid layout */
+}
+
+.logo {
+    width: 6%;
+    height: auto;
+}
+
+/*------ Background images ------*/
+body {
+    font-family: "Arial", sans-serif;
+    background-image: url(styles/images/background6.jpeg);
+    background-size: 100%;
+    background-repeat: repeat-y; /* repeat vertically */
+}
+
+
+h1 /* shorthand font property */ {
+    font-weight: bold; /* regular font weight */
+    font-size: 2em; 
+    line-height: 1.2%;
+    color: antiquewhite;
+    font-family: "Arial", sans-serif; 
+}
+
+.job-details h1 {
+    font: bold 2em/1.2% antiquewhite "Arial", sans-serif;
+}
+
+/*------ Navigation Bar -------*/
+nav a {
+    color: lightgray;
+    font-weight: bold; /* bold links */
+}
+
+nav a:hover {
+    color: lightsteelblue; /* changes color when hover */
+}
+
+.button /* button function */ {
+    display: inline-block; /* allows block sits inline */
+    padding: 1% 2%; /* top & bottom 1% ; left & right 2% */
+    background-color: lightgray;
+    color: black; /* text color */
+    border: none;
+    border-radius: 8%; /* rounded corner */
+    font-size: 93%;
+    cursor: pointer;
+}
+
+.button:hover /*when cursor move, it changed color*/ {
+    background-color: darkgrey;
+}
+
+aside /* easy access for users */ {
+    width: 25%; /* the width of aside */
+    float: right; /* aside floating to the right */
+    border: 4px double darkslateblue; /* double lined border */
+    margin: 2%; /* outer spacing */
+    padding: 1.5%; /* inner spacing */
+    background:url("images/fade.jpg") repeat-x center center; /* repeat horizontally */
+    background-size: contain; /* puts contain to make sure fluid layout */
+}
+
+.job-positions h2 {
+    display: flex; /* centers the words horizontally  */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height:  1em;
+    margin: 6% 5%; /* spacing for header 2 */
+    padding: 0;
+    color: whitesmoke;
+    font-family:  "Arial", sans-serif;
+    font-size: 3em;
+}
+
+.job-positions h2 > span {
+    position: relative;
+    display: inline-block;
+    color: blue;
+    height: 1.25em; /* to only show one word at a time */
+    vertical-align: bottom;
+    overflow: hidden; /* hide the rest of words during animation */
+}
+
+.job-positions h2 > span > span {
+    display: block;
+    animation: animateWordsH2 7s infinite ease; /* animation loop */
+}
+
+@keyframes animateWordsH2 {
+    0% {transform: translateY(0%);}
+    25% {transform: translateY(-100%);} /* slides up */
+    50% {transform: translateY(-200%);} /* slides up */
+    75% {transform: translateY(-300%);} /* slides up */
+    100% {transform: translateY(-400%);} /* slides up */
+}
+
+.job-positions h3 {
+    display: flex; /* centers the words horizontally  */
+    align-items: center;
+    justify-content: center;
+    height: 32%;
+    margin: 10% 3%;
+    padding: 0;
+    color: whitesmoke;
+    font-family:  "Arial", sans-serif;
+    font-size: 2.5em;  
+    line-height: 1.2em;
+}
+
+.job-positions h3 > span {
+    position: relative;
+    display: inline-block;
+    color: blue;
+    height: 1.2em; /* to only show one word at a time */
+    vertical-align: bottom;
+    overflow: hidden; /* hide the rest of words during animation */
+}
+
+.job-positions h3 > span > span {
+    display: block;
+    height: 2.4em; 
+    line-height: 2.4em;
+    animation: animateWordsH3 10s infinite ease; /* animation loop */
+}
+
+@keyframes animateWordsH3 {
+    0% {transform: translateY(0%);}
+    50% {transform: translateY(-200%);} /* slides up */
+    100% {transform: translateY(-400%);} /* slides up */
+}
+
+/* Outer container scrolls horizontally */
+/* Make the page scroll horizontally */
+/*------ Images Slider ------*/
+.slider-track {
+    display: flex; /* horizontal row */
+    gap: 20px; /* space between cards */
+    overflow-x: auto; /* horizontal scrolling */
+    scroll-snap-type: x mandatory; /* enables scroll snap to each card */
+    padding: 2rem;
+}
+
+.slider-container {
+    flex: 0 0 300px; /* fixed width, so the card doesnt shrink */
+    scroll-snap-align: start; /* snaps to the start of the scroll container */
+    border-radius: 12px; /* rounded corners */
+    background: navy; 
+    color: white;
+    box-shadow: 0 8px 20px gray; /* shadow */
+    transition: transform 0.3s ease; /* zoom effect */
+}
+
+.slider-container:hover {
+    transform: scale(1.05); /* slightly zooms in 5%*/
+    z-index: 1; /* stacking order */
+}
+
+/* Inner container holds all cards side-by-side */
+.slider-images {
+    display: flex;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 2rem; /* align positions nicely */
+}
+
+/* Each individual card */
+.slider-img {
+    flex: 0 0 300px;
+    height: 400px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden; /* prevents image spills out */
+    scroll-snap-align: start;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    box-shadow: 0 8px 20px gray;
+}
+
+/* Image styling */
+.slider-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    filter: brightness(70%); /* makes the image darker initially */
+    transition: filter 0.3s ease; /* brightness effect */
+}
+
+/* Hover effect */
+.slider-img:hover {
+    transform: scale(1.05); /* zoom the card on hover */
+    z-index: 1;
+}
+
+.slider-img:hover img {
+    filter: brightness(100%); /* brightness increase to 100% when hover */
+}
+
+/* Details overlay */
+.details {
+    position: absolute; /* positioned relative to .slider-img */
+    bottom: 1.25em;
+    left: 1.25em;
+    color: white; 
+    z-index: 2; /* to control stacking order, appears on top of the image*/
+}
+
+.details h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 31.35%;
+}
+
+.details .subtitle {
+    font-size: 0.9em;
+    opacity: 0.9; /* lower transparency to make it more subtle */
+}
+
+/*------ Job Details ------*/
+.job-image {
+    width: 100%; /* full width */
+    padding-top: 15%; /* spacing above the image */
+    padding-bottom: 15%; /* spacing below the image */
+}
+
+.job-details {
+    display: grid; /* grid layout so it fits everything without looking weird */
+    grid-template-columns: 30% 70%; /* 30% for job title, 70% for description */
+    gap: 2%; /* between each container */
+    margin: 2%; /* space outside of the container */
+    background-color: whitesmoke;
+    border: 1px solid navy;
+    border-radius: 3%; /* rounded corners */
+    padding: 2%; /* adding this to make the inner space looks apropriate */
+    box-shadow: 0 6px 12px darkgrey;
+}
+
+/*------ Job Title ------*/
+.job-details dt {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: black;
+}
+
+/*------ Job Description ------*/
+.job-details dd {
+    font-size: 0.95em;
+    color: darkslategray;
+    line-height: 1.6;
+}
+
+/*------ Footer ------*/
+footer {
+    width: 100%; /* cover the full width of the page */
+    text-align: center; /* center the text */
+    font-size: 0.8em; /* small font */
+    background-color: lightgray;
+    margin-top: 3%; /* spacing above */
+    margin-bottom: 0; /* spacing below */
+    padding-bottom: 3%; /* inner gray padding-bottom */
+}
+
+/*===========================================================================*/
+/* CSS - APPLY.HTML */
+/* Joe Yee's Part - Apply Page Styling */
+/* Create a box like real form */
+.form-box {
+    max-width: 600px; /* Limit the width of the form */
+    margin: auto; /* Center the form on the page */
+    padding: 2%; /* Space inside the form */
+    border: 1px solid black;
+    border-radius: 8px;
+    background: white;
+    display: flex; /* Use flexbox for layout */         
+    flex-direction: column; /* Stack children vertically */
+    gap: 1em;   
+    box-shadow: 0 4px 8px lightgray;               
+}
+
+/* Group wrapper (label + input) */
+.form-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Design the form labels */
+.form-label-required, .form-label {
+    font-weight: bold;
+    margin-bottom: 0.5%;
+}
+
+/* Design the Inputs, select, textarea */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+select,
+textarea {
+    padding: 1.5%;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+}
+
+/* Design and setting for the apply form button */
+.form-button {
+    margin: auto; 
+    padding: 2% 3%; /* Top/Bottom 2%, Left/Right 3% */
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer; /* Pointer cursor on hover */
+    
+    animation: colorCycle 6s linear infinite; /* Animation for the button */
+}
+
+/* Animation for the button */
+@keyframes colorCycle {
+    0%   { background-color: lightblue; }
+    25%  { background-color: cadetblue; }
+    50% { background-color: powderblue; }
+    75%  { background-color: cornflowerblue; }
+    50% { background-color: powderblue; }
+    100%  { background-color: skyblue; }
+}
+
+/* Show * for the text box that are required to fill up */
+.form-label-required::after {
+    content: " *";
+    color: red;
+}
+
+/* Form header shadow effect */
+.form-title {
+    text-align: center;
+    text-shadow: 
+    0 0 5px Navy, /* layer 1 for inner */
+    0 0 10px turquoise, /* layer 2 for center */
+    0 0 20px white; /* layer 3 for outer */
+}
+
+/*===========================================================================*/
+/* ABOUT PAGE STYLES
+   Author: Ngoi Ye Sheng
+   Purpose: Styling for about.html only */
+   /* CSS - ABOUT.HTML */
+
+.about-page h2  {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: black;
+    font-family:  "Arial", sans-serif; /*font will be change*/
+}
+
+.about-page p  {
+    font-weight: normal;
+    font-size: 1.2em;
+    color: black;
+    font-family:  "Arial", sans-serif; /*font will be change*/
+}
+
+.group-name h2 {
+    font-size: 2.5em;
+}
+.about-page main {
+    max-width: 80%; /* give more breathing space */
+    margin: 5% auto;
+    padding: 2em;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px #ccc;
+}
+
+.about-page-quantum h1 {
+    color: black; 
+    text-align: center; 
+}
+
+
+
+.about-page div {
+   max-width: 1000px;
+}
+
+/* -------- Section Layout -------- */
+.about-page section {
+    display: flex;
+    justify-content: space-between; /* space between two boxes */
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+/* -------- Group Members -------- */
+.group-members {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    text-align: right; 
+    float: right;
+    width: 60%;
+    max-width: 60%;
+    margin: 2%;
+    padding: 2%;
+    background: #dcf2ff;
+    background-size: 15%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgb(128, 128, 128);
+}
+
+.group-members h2 {
+    text-align: left;
+}
+
+.group-members ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
+.group-members li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1em;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: 500;  
+    position: relative;
+}
+
+.group-members .student-id { 
+    margin-left: 10px;
+    font-weight: normal; 
+    color: #333333; /* hex color */
+}
+
+
+.members-contributions dd {
+    font-size: 20px;
+}
+/* -------- Group Photo -------- */
+.group-photo {
+    max-width: 80%;
+    margin: 1.2% 2%;
+    padding: 1em 1em;
+    padding-right: 13%;
+    background: #dcf2ff;
+    background-size: 15%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px gray;
+}
+.group-photo h2 {
+    float: right;   
+    width: 45%; /* adjust width to fit nicely with image */
+}
+
+.about-page figure {
+    float: right;          /* align to right */
+    max-width: 70%;         /* limit max width */
+}
+
+.about-page figure img {
+    border: 3px solid #000080;  /* shorthand border with hex navy */
+    border-radius: 8px;
+    display: block;
+    width: 145%;
+    height: auto;
+}
+
+.group-photo figcaption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 8px;
+    font-size: 1.2em;
+    color: #000000; /* hex gray */
+}
+
+/* -------- Contributions -------- */
+.members-contributions {
+    clear: both; /* reset float */
+    max-width: 80%;
+    margin: 1.2% auto;
+    padding:2em 3em;
+    background: #dcf2ff;
+    background-size: 15%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px gray;
+}
+
+.members-contributions dt {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 40px;
+}
+
+.members-contributions dd {
+    font-size:  125%;
+  
+}
+
+/* -------- Working Experience -------- */
+.working-experience {
+    max-width: 80%;
+    margin: 2% auto;
+    padding: 2em 10%;
+    background: #dcf2ff;
+    background-size: 15%;
+    border-radius: 12px ;
+    box-shadow: 0 4px 10px gray;
+}
+
+.working-experience ul {
+    font-size: 1.2em;
+}
+
+.working-experience h3 {
+    font-size: 24px;
+}
+/* -------- Interests Table -------- */
+.members-interests {
+    text-align: center;
+    max-width: 30%;
+    margin: 2% auto;
+    padding: 2em 0.5em;
+    background: #dcf2ff;
+    background-size: 15%; 
+    border-radius: 12px ;
+    box-shadow: 0 4px 10px gray;
+    overflow-x: auto; /* horizontal scroll on small screens */
+}
+.members-interests table {
+    margin: auto;        /* center table */
+    border-collapse: collapse; /* remove double borders */
+    max-width: 90%;
+    text-align: center;
+    margin: auto 200px; /* center table */
+}
+
+.members-interests th,
+.about-page td {
+    border: 2px solid #333333;  /* hex border */
+    padding: 1.5em 1em;          /* increase padding */
+    font-size: 150%;
+}
+
+.members-interests th {
+    background-color: #cccccc;  /* hex light gray */
+    font-weight: bold;
+    color: #1c038b;             /* hex navy */
+}
+
+.members-interests td {
+    background-color: #6c9aff;  /* hex blue */
+}
+
+.members-interests td:hover {
+    background-color: #434fff;  /* hex darker blue */
+}
+
+/* -------- Our Timetable -------- */
+.bottom-row {
+    text-align: center;
+    max-width: 90%;
+    margin: auto auto; /* center horizontally */
+    padding: 2em ; 
+    background: #dcf2ff;
+    background-size: 7%;   /* smaller pattern */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px gray;
+    overflow-x: auto; /* horizontal scroll on small screens */
+}
+
+.bottom-row h2 {
+    text-align: left;
+    margin-bottom: 15px; /* space below heading */
+}
+
+.bottom-row table {
+    border-collapse: collapse; /* remove double borders */
+    width: 180%; /* full width */
+    max-width:180%;  /* limit max width */
+    text-align: center; /* center text */
+    margin: auto;      /* center table */
+}
+
+.bottom-row th,
+.bottom-row td {
+    border: 2px solid #333333;  /* border around all cells */
+    padding: 1em;              /* balanced padding */
+    font-size: 1.2em;            /* smaller font for timetable */
+    min-width: 6em;            /* keeps boxes uniform */
+}
+
+.bottom-row th {
+    background-color: #cccccc;  /* header gray */
+    font-weight: bold;
+    color: #000000;
+}
+
+.bottom-row td {
+    background-color: #a4f4ff;  /* light blue */
+    vertical-align: middle;
+}
+
+.bottom-row td:hover {
+    background-color: #45daff;  /* highlight on hover */
+}
