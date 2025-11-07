@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <meta charset="UTF-8">
-        <meta name="description" content="Home page of our cybersecurity company">
-        <meta name="keywords" content="cybersecurity, security, IT, protection">
-        <meta name="author" content="Quantum Shield's website developers">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Quantum Shield: Your Online Barrier</title>
-    </head>
-    <body class="index-page">
         <?php
             include 'header.inc';
             include 'nav.inc';
+            require_once 'settings.php';
         ?>
-        <hr>
         <section class="index-title"> <!--introduction-->
             <h2 class="big-title"><span>Welcome to Quantum Shield,</span></h2>
             <h3 class="first-title"><span>The online barrier that keeps your data secure all across the world.</span></h3>
@@ -51,5 +39,3 @@
         <?php
             include 'footer.inc';
         ?>
-    </body>
-</html>
