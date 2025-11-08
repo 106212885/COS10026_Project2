@@ -10,7 +10,7 @@
         <hr>
 
         <!-- Job Application Form -->
-        <form class="form-box" method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" >
+        <form class="form-box" method="post" action="process_eoi.php" novalidate="novalidate" >
 
             <h1 class="form-title">Job Application</h1>
 
@@ -95,10 +95,11 @@
                 <label for="CLD_TECH"><input type="checkbox" id="CLD_TECH" name="category[]" value="CLD_TECH"/>Cloud Technologies</label> 
                 <label for="RISK_COM"><input type="checkbox" id="RISK_COM" name="category[]" value="RISK_COM"/>Risk & Compliance Knowledge</label> 
                 <label for="PRO_SCRP"><input type="checkbox" id="PRO_SCRP" name="category[]" value="PRO_SCRP"/>Programming & Scripting</label> 
+                <label for="OTHER_SKILL"><input type="checkbox" id="OTHER_SKILL" name="category[]" value="OTHER_SKILL"/>Other Skills</label>
 
             <p class="form-details">
                 <label for="Other_skills" class="form-label">Other Skills</label><br />
-                <textarea id="Other_skills" name="comments" rows="5" cols="65" placeholder="Please elaborate more if you have other skills..."></textarea>
+                <textarea id="Other_skills" name="Other_skills" rows="5" cols="65" placeholder="Please elaborate more if you have other skills..."></textarea>
             </p >
 
             <!-- Additional CV Upload  -->
