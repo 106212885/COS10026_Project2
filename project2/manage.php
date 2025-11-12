@@ -169,14 +169,8 @@ function displayEOITable($result) {
         <select name="new_status" required>
             <option value="">-- Select Status --</option>
             <option value="NEW">NEW</option>
-            <option value="REVIEWING">REVIEWING</option>
-            <option value="SHORTLISTED">SHORTLISTED</option>
-            <option value="INVITED">INVITED</option>
-            <option value="LODGED">LODGED</option>
-            <option value="HOLD">HOLD</option>
-            <option value="REJECTED">REJECTED</option>
-            <option value="WITHDRAWN">WITHDRAWN</option>
-            <option value="CLOSED">CLOSED</option>
+            <option value="CURRENT">CURRENT</option>
+            <option value="FINAL">FINAL</option>
         </select>
         <input type="submit" value="Update">
     </form>
