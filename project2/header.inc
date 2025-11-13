@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles/styles.css">
         <meta charset="UTF-8">
         <meta name="description" content="Job Details page of our cybersecurity company">
         <meta name="keywords" content="cybersecurity, security, IT, protection">
@@ -13,7 +13,5 @@
     <body>
         <!-- Company Logo and Navigation Bar  -->
         <header>
-            <img src= "images/Quantum_Shield_Logo.png" alt="Quantum Shield Logo" class="logo">
-            <h1>
-                Job Application
-            </h1>
+            <img src="images/Quantum_Shield_Logo.png" alt="Quantum Shield Logo" class="logo">
+            <h1>Job Application</h1>
