@@ -51,7 +51,7 @@ try {
     $database_connection->set_charset("utf8mb4");
 } catch (Exception $connection_error) {
     error_log("Database connection error: " . $connection_error->getMessage());
-    display_error_page("System temporarily unavailable. Please try again later.");
+    display_error_page(["System temporarily unavailable. Please try again later."]);
     exit();
 }
 
@@ -89,7 +89,6 @@ function is_valid_postcode_for_state(string $postcode, string $state): bool {
     
     return false;
 }
-
 
 // Calculate age from date of birth
 function calculate_age(string $date_of_birth): int {
@@ -177,13 +176,18 @@ foreach ($required_fields as $field => $label) {
     }
 }
 
-// Name validation (alpha only, max 20 characters)
-if (!empty($application_data['first_name']) && !preg_match("/^[A-Za-z]{1,20}$/", $application_data['first_name'])) {
-    $validation_errors[] = "First name must contain only letters (max 20 characters).";
+// Job reference validation
+if (!empty($application_data['job_reference']) && !preg_match("/^[A-Za-z]{2}[0-9]{3}$/", $application_data['job_reference'])) {
+    $validation_errors[] = "Job reference must be in format: 2 letters followed by 3 numbers (e.g., CS288).";
 }
 
-if (!empty($application_data['last_name']) && !preg_match("/^[A-Za-z]{1,20}$/", $application_data['last_name'])) {
-    $validation_errors[] = "Last name must contain only letters (max 20 characters).";
+// Name validation (alpha with spaces/hyphens, max 20 characters)
+if (!empty($application_data['first_name']) && !preg_match("/^[A-Za-z\s\-]{1,20}$/", $application_data['first_name'])) {
+    $validation_errors[] = "First name must contain only letters, spaces and hyphens (max 20 characters).";
+}
+
+if (!empty($application_data['last_name']) && !preg_match("/^[A-Za-z\s\-]{1,20}$/", $application_data['last_name'])) {
+    $validation_errors[] = "Last name must contain only letters, spaces and hyphens (max 20 characters).";
 }
 
 // Age validation (minimum 23 years)
@@ -204,22 +208,20 @@ if (!empty($application_data['date_of_birth'])) {
 
 // Address field length validation
 if (!empty($application_data['street_address'])) {
-    if (!preg_match("/^[A-Za-z0-9\s\-\/\.\,]{1,40}$/", $application_data['street_address'])) {
-        $validation_errors[] = "Street address can only contain letters, numbers, spaces, hyphens, slashes, dots, and commas.";
+    if (!preg_match("/^[A-Za-z0-9\s\-\/\.\,\']{1,40}$/", $application_data['street_address'])) {
+        $validation_errors[] = "Street address can only contain letters, numbers, spaces, hyphens, slashes, dots, commas, and apostrophes.";
     }
     
-    // Keep your existing length check
     if (strlen($application_data['street_address']) > 40) {
         $validation_errors[] = "Street address must not exceed 40 characters.";
     }
 }
 
 if (!empty($application_data['suburb'])) {
-    if (!preg_match("/^[A-Za-z\s\-]{1,40}$/", $application_data['suburb'])) {
-        $validation_errors[] = "Suburb/town can only contain letters, spaces, and hyphens.";
+    if (!preg_match("/^[A-Za-z\s\-\.\']{1,40}$/", $application_data['suburb'])) {
+        $validation_errors[] = "Suburb/town can only contain letters, spaces, dots, and hyphens.";
     }
     
-    // Keep your existing length check
     if (strlen($application_data['suburb']) > 40) {
         $validation_errors[] = "Suburb/town must not exceed 40 characters.";
     }
@@ -250,14 +252,10 @@ if (!empty($application_data['postcode']) && !empty($application_data['state']))
     }
 }
 
-// Email validation with pattern check
+// Email validation
 if (!empty($application_data['email'])) {
     if (!filter_var($application_data['email'], FILTER_VALIDATE_EMAIL)) {
         $validation_errors[] = "Please enter a valid email address.";
-    }
-    // Additional pattern check for common providers
-    else if (!preg_match('/@(gmail|yahoo|hotmail|outlook|icloud|protonmail|aol)\.com$/i', $application_data['email'])) {
-        $validation_errors[] = "Please use a common email provider like Gmail, Yahoo, or Outlook.";
     }
 }
 
@@ -295,6 +293,8 @@ if (!empty(trim($application_data['other_skills'])) && !in_array('OTHER_SKILL', 
 
 // 6. Process application or display errors
 if (!empty($validation_errors)) {
+    error_log("Validation failed for job " . ($application_data['job_reference'] ?? 'unknown') . " - Errors: " . implode(", ", $validation_errors));
+
     // Save all form data to session
     $_SESSION['form_data'] = [
         'Job_ref_num' => $_POST['Job_ref_num'],
@@ -312,16 +312,8 @@ if (!empty($validation_errors)) {
         'category' => $submitted_skills
     ];
     
-    // Show errors on validation page
-    echo "<h2>Application Submission Failed</h2>\n";
-    echo "<p>Please correct the following errors:</p>\n";
-    echo "<ul>\n";
-    
-    foreach ($validation_errors as $error) {
-        echo "<li>" . htmlspecialchars($error) . "</li>\n";
-    }
-
-    echo "<a href='apply.php'>Return to Application Form</a>\n";
+    // Show errors on validation page using the reusable function
+    display_error_page($validation_errors);
     exit();
 }
 
@@ -363,7 +355,6 @@ try {
         // Clear stored form data on success
         if (isset($_SESSION['form_data'])) {
             unset($_SESSION['form_data']);
-            unset($_SESSION['form_errors']);
         }
         
         display_success_page($eoi_number);
@@ -379,3 +370,4 @@ try {
 } finally {
     $database_connection->close();
 }
+?>
