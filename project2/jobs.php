@@ -2,7 +2,117 @@
 include 'header.inc';
 include 'nav.inc';
 require_once('settings.php');
+?>
 
+<!--Animation - SPAN function-->
+<section class="job-positions">
+<h2>
+    We're Hiring  
+    <span>
+        <span>CYBERSECURITY SPECIALIST</span>
+        <span>NETWORK SECURITY ENGINEER</span>
+        <span>CYBERSECURITY ANALYST</span>
+        <span>NETWORK ADMINISTRATOR</span>
+        <span>IT SUPPORT SPECIALIST</span>
+    </span>
+</h2>
+</section>
+
+<!--Intro - Image slides-->
+<main class="slider-track">
+
+  <article class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img">
+        <a href="#cybersecurity-specialist">
+          <img src="images/cs288.jpg" alt="Cybersecurity Specialist">
+        </a>
+        <div class="details">
+          <span class="category">CS288</span>
+          <h3>Cybersecurity Specialist</h3>
+          <p class="subtitle">Security Is Not Just Code—It's Confidence.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img">
+        <a href="#network-security-engineer">
+          <img src="images/ne911.jpg" alt="Network Security Engineer">
+        </a>
+        <div class="details">
+          <span class="category">NE911</span>
+          <h3>Network Security Engineer</h3>
+          <p class="subtitle">Fortifying Connections, Securing Every Byte.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img">
+        <a href="#cybersecurity-analyst">
+          <img src="images/ca098.jpeg" alt="Cybersecurity Analyst">
+        </a>
+        <div class="details">
+          <span class="category">CA098</span>
+          <h3>Cybersecurity Analyst</h3>
+          <p class="subtitle">Decoding Threats, Delivering Peace of Mind.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img">
+        <a href="#network-administrator">
+          <img src="images/na718.jpg" alt="Network Administrator">
+        </a>
+        <div class="details">
+          <span class="category">NA718</span>
+          <h3>Network Administrator</h3>
+          <p class="subtitle">Keeping Systems Synced, Secure, and Seamless.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img">
+        <a href="#itsupport-specialist">
+          <img src="images/im404.png" alt="IT Support Specialist">
+        </a>
+        <div class="details">
+          <span class="category">IM404</span>
+          <h3>IT Support Specialist</h3>
+          <p class="subtitle">Tech That Works, Support That Listens.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<!--Aside, easy access for users-->
+<aside>
+    <p><strong>Recruiting Talent</strong></p>
+        <ul>
+            <li><a href="#cybersecurity-specialist">Cybersecurity Specialist</a></li>
+            <li><a href="#network-security-engineer">Network Security Engineer</a></li>
+            <li><a href="#cybersecurity-analyst">Cybersecurity Analyst</a></li>
+            <li><a href="#network-administrator">Network Administrator</a></li>
+            <li><a href="#itsupport-specialist">IT Support Specialist/ IT Manager</a></li>
+        </ul>
+    <p><strong>Submit your CV</strong></p>
+    <a href="apply.html">Application Form</a>
+</aside>
+
+<?php
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
