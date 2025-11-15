@@ -14,24 +14,52 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+else{
+    // 3. Load database settings
+    require_once("settings.php");
 
-// 3. Load database settings
-require_once("settings.php");
+    $conn = new mysqli($host, $user, $pwd, $sql_db);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-$conn = new mysqli($host, $user, $pwd, $sql_db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // 3.1 enhancements: Check whether username and password is correct.
+    $stmt = $conn->prepare("SELECT password FROM admins WHERE username = ?");
+    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows !== 1) {
+        session_unset();
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    } else {
+        $stmt->bind_result($hashed_password);
+        $stmt->fetch();
+
+        if (!password_verify($_SESSION['password'], $hashed_password)) {
+            session_unset();
+            session_destroy();
+            header("Location: login.php");
+            exit();
+        }
+    }
+
+    $stmt->close();
+
 }
 
 // 4. Handle form actions
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // 4.1 Delete EOIs by JobRefNo
     if (!empty($_POST['delete_jobrefno'])) {
         $jobref = $_POST['delete_jobrefno'];
         $stmt = $conn->prepare("DELETE FROM eoi WHERE JobRefNo = ?");
         $stmt->bind_param("s", $jobref);
         $stmt->execute();
-        echo "<p>Deleted EOIs for JobRefNo: " . htmlspecialchars($jobref) . "</p>";
+        echo "<p>Deleted EOIs for JobRefNo: " . $jobref . "</p>";
         $stmt->close();
     }
 
@@ -42,8 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("UPDATE eoi SET Status = ? WHERE Email = ?");
         $stmt->bind_param("ss", $status, $email);
         $stmt->execute();
-        echo "<p>Updated status for applicant with email: " . htmlspecialchars($email) . "</p>";
+
+        echo "<p>Updated status for applicant with email: " . $email . "</p>";
         echo "<p>Rows updated: " . $stmt->affected_rows . "</p>";
+
         $stmt->close();
     } elseif (isset($_POST['new_status']) && $_POST['new_status'] === "") {
         echo "<p style='color:red;'>Please select a valid status.</p>";
@@ -59,24 +89,26 @@ function displayEOITable($result) {
                 <th>StreetAddress</th><th>Suburb</th><th>State</th><th>Postcode</th>
                 <th>Email</th><th>Phone</th><th>Skills</th><th>OtherSkills</th><th>Status</th>
               </tr>";
+
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars($row['JobRefNo']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['FirstName']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['LastName']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['StreetAddress']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['Suburb']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['State']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['Postcode']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['Email']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['Phone']) . "</td>";
-            echo "<td>" . htmlspecialchars(implode(", ", array_filter([
+            echo "<td>" . $row['JobRefNo'] . "</td>";
+            echo "<td>" . $row['FirstName'] . "</td>";
+            echo "<td>" . $row['LastName'] . "</td>";
+            echo "<td>" . $row['StreetAddress'] . "</td>";
+            echo "<td>" . $row['Suburb'] . "</td>";
+            echo "<td>" . $row['State'] . "</td>";
+            echo "<td>" . $row['Postcode'] . "</td>";
+            echo "<td>" . $row['Email'] . "</td>";
+            echo "<td>" . $row['Phone'] . "</td>";
+            echo "<td>" . implode(", ", array_filter([
                 $row['Skill1'], $row['Skill2'], $row['Skill3'], $row['Skill4'], $row['Skill5']
-            ]))) . "</td>";
-            echo "<td>" . htmlspecialchars($row['OtherSkills']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['Status']) . "</td>";
+            ])) . "</td>";
+            echo "<td>" . $row['OtherSkills'] . "</td>";
+            echo "<td>" . $row['Status'] . "</td>";
             echo "</tr>";
         }
+
         echo "</table>";
     } else {
         echo "<p>No results found.</p>";
@@ -84,20 +116,21 @@ function displayEOITable($result) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<body>
-    <?php
-    include_once("header.inc");
-    include_once("nav.inc");
-    ?>
-    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+
+ <?php include_once("header.inc"); ?>
+
+    <h1>Manage</h1>
+
+    <?php include_once("nav.inc"); ?>
+
+    <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
 
     <!-- Logout Button -->
-    <form method="post" style="margin-bottom: 20px;">
+    <form method="post">
         <input type="submit" name="logout" value="Logout">
     </form>
 
+    <section class="manage-title">
     <h2>List All EOIs</h2>
     <?php
     $result = $conn->query("SELECT * FROM eoi");
@@ -105,7 +138,7 @@ function displayEOITable($result) {
     ?>
 
     <h2>Search EOIs by JobRefNo</h2>
-    <form method="get">
+    <form class = "form-box" method="get">
         <input type="text" name="jobref_search" placeholder="JobRefNo">
         <input type="submit" value="Search">
     </form>
@@ -122,7 +155,7 @@ function displayEOITable($result) {
     ?>
 
     <h2>Search EOIs by Applicant Name</h2>
-    <form method="get">
+    <form class="form-box" method="get">
         <input type="text" name="fname" placeholder="First Name">
         <input type="text" name="lname" placeholder="Last Name">
         <input type="submit" value="Search">
@@ -158,13 +191,13 @@ function displayEOITable($result) {
     ?>
 
     <h2>Delete EOIs by JobRefNo</h2>
-    <form method="post">
+    <form class = "form-box" method="post">
         <input type="text" name="delete_jobrefno" placeholder="JobRefNo to delete">
         <input type="submit" value="Delete">
     </form>
 
     <h2>Update EOI Status by Email</h2>
-    <form method="post">
+    <form class = "form-box" method="post">
         <input type="email" name="update_status_email" placeholder="Applicant Email" required>
         <select name="new_status" required>
             <option value="">-- Select Status --</option>
@@ -174,7 +207,9 @@ function displayEOITable($result) {
         </select>
         <input type="submit" value="Update">
     </form>
-    <?php include_once("footer.inc");
-    ?>
+
+    </section>
+    <?php include_once("footer.inc"); ?>
+
 </body>
 </html>
