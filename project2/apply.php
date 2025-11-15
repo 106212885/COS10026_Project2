@@ -48,8 +48,6 @@
             include 'nav.inc';
         ?>
 
-        <hr>
-
         <!-- Job Application Form -->
         <form class="form-box" method="post" action="process_eoi.php" novalidate="novalidate">
 
