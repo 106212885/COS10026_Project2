@@ -7,5 +7,6 @@
     <a href="manage.php">Manage</a> |
     <a href="mailto:info@quantumshield.com.au">Contact Us</a>
 </nav>
-<hr>
+</header>
+
  
