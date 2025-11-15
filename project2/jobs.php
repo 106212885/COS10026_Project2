@@ -166,5 +166,20 @@ if (!$conn) {
     mysqli_close($conn);
 }
 
+?>
+
+<!--Animation - Closing Lines-->
+<section class="job-positions">
+<h3>
+    Interested? <br> Think you're the right fit?   
+    <span>
+        <span>VISIT OUR APPLICATION PAGE</span>
+        <span>& SUBMIT YOUR APPLICATION TODAY!</span>
+        <span>WE ARE EXCITED TO WELCOME MOTIVATED INDIVIDUALS TO OUR TEAM!</span>
+    </span>
+</h3>
+</section>
+
+<?php
 include 'footer.inc';
 ?>

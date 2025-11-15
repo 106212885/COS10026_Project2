@@ -212,7 +212,7 @@ header {
 /*------ Background images ------*/
 body {
     font-family: "Arial", sans-serif;
-    background-image: url(styles/images/background6.jpeg);
+    background-image:url(styles/images/background6.jpeg);
     background-size: 100%;
     background-repeat: repeat-y; /* repeat vertically */
 }
