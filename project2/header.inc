@@ -7,7 +7,7 @@
         <meta name="keywords" content="cybersecurity, security, IT, protection">
         <meta name="author" content="Quantum Shield's website developers">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Job Application Page</title>
+        <title>Quantum Shield: Your Online Barrier</title>
     </head>
 
     <body>

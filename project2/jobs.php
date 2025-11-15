@@ -111,6 +111,7 @@ require_once('settings.php');
     <p><strong>Submit your CV</strong></p>
     <a href="apply.html">Application Form</a>
 </aside>
+</body>
 
 <?php
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
@@ -179,6 +180,7 @@ if (!$conn) {
     </span>
 </h3>
 </section>
+
 
 <?php
 include 'footer.inc';
