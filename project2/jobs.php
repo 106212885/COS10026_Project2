@@ -114,10 +114,13 @@ require_once('settings.php');
 </body>
 
 <?php
+// connects my sql database
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
+// if connection fails, show error message and stop execution
 if (!$conn) {
     echo "<p>Database connection failure</p>";
+    // gets all job records from the jobs table
 } else {
     $query = "SELECT * FROM jobs";
     $result = mysqli_query($conn, $query);
@@ -133,10 +136,12 @@ if (!$conn) {
                 <dt>
                   <strong>" . $row['title'] . "</strong>";
 
+            // show job image
             if ($row['image'] != "") {
-                echo "<img src='" . $row['image'] . "' alt='" . $row['title'] . "' class='job-image'>";
+                echo "<img src='" . $row['image'] . "' alt='" . $row['title'] . "' class='job-image background-image'>";
             }
 
+            // job info
             echo "</dt>
                 <dd>
                   <strong>Reference ID:</strong> " . $row['ref_id'] . "<br>
@@ -149,6 +154,7 @@ if (!$conn) {
                     The title of the position to whom the successful applicant will report: " . $row['reporting_manager'] . "<br>
                     " . $row['details'];
 
+            // adds a clickable reference link
             if ($row['references_link'] != "") {
                 echo "<br><a href='" . $row['references_link'] . "'>Reference Link</a>";
             }
@@ -160,6 +166,7 @@ if (!$conn) {
         }
 
         echo "</main>";
+    // if query failed, then show the error message
     } else {
         echo "<p>Unable to retrieve jobs data.</p>";
     }
