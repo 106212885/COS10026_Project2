@@ -15,12 +15,20 @@
                 return isset($form_data[$field]) ? htmlspecialchars($form_data[$field]) : '';
             }
 
-            // Helper function for checkboxes
-            function is_checked($value) {
+            // Helper function for checkboxes with auto-check for first skill
+            function is_checked($value, $auto_check = false) {
                 global $form_data;
+                
+                // If we have stored form data (from validation errors), use that
                 if (isset($form_data['category']) && is_array($form_data['category'])) {
                     return in_array($value, $form_data['category']) ? 'checked' : '';
                 }
+                
+                // If no stored data and it's the auto-check skill, check it (first load only)
+                if ($auto_check && empty($form_data)) {
+                    return 'checked';
+                }
+                
                 return '';
             }
 
@@ -123,11 +131,11 @@
 
             <!-- Required technical list and Other Skills  -->
             <p class="form-label-required">Required technical list</p>
-                <label for="NET_SEC_FUN"><input type="checkbox" id="NET_SEC_FUN" name="category[]" value="NET_SEC_FUN" <?php echo is_checked('NET_SEC_FUN'); ?> />Networking & Security Fundamentals</label>    
+                <!-- Required technical list and Other Skills  -->
+                <label for="NET_SEC_FUN"><input type="checkbox" id="NET_SEC_FUN" name="category[]" value="NET_SEC_FUN" <?php echo is_checked('NET_SEC_FUN', true); ?> />Networking & Security Fundamentals</label>    
                 <label for="OP_INF"><input type="checkbox" id="OP_INF" name="category[]" value="OP_INF" <?php echo is_checked('OP_INF'); ?>/>Operating Systems & Infrastructure</label> 
                 <label for="CLD_TECH"><input type="checkbox" id="CLD_TECH" name="category[]" value="CLD_TECH" <?php echo is_checked('CLD_TECH'); ?>/>Cloud Technologies</label> 
-                <label for="RISK_COM"><input type="checkbox" id="RISK_COM" name="category[]" value="RISK_COM" <?php echo is_checked('RISK_COM'); ?>/>Risk & Compliance Knowledge</label> 
-                <label for="PRO_SCRP"><input type="checkbox" id="PRO_SCRP" name="category[]" value="PRO_SCRP" <?php echo is_checked('PRO_SCRP'); ?>/>Programming & Scripting</label> 
+                <label for="RISK_COM"><input type="checkbox" id="RISK_COM" name="category[]" value="RISK_COM" <?php echo is_checked('RISK_COM'); ?>/>Risk & Compliance Knowledge</label>  
                 <label for="OTHER_SKILL"><input type="checkbox" id="OTHER_SKILL" name="category[]" value="OTHER_SKILL" <?php echo is_checked('OTHER_SKILL'); ?>/>Other Skills</label>
 
             <p class="form-details">
