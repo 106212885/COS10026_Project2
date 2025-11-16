@@ -1,6 +1,9 @@
 
         <?php
             include 'header.inc';
+        ?>
+        <h1>Quantum Shield</h1>
+        <?php
             include 'nav.inc';
             require_once 'settings.php';
         ?>
@@ -33,7 +36,7 @@
             <p class="small-title"><strong>We offer competitive salaries, comprehensive benefits, and opportunities for professional growth and development.</strong></p>
             <h2 class="big-title">Visit our</h2>
             <p class="small-title"><strong>Job Details page to learn more about our current openings and how to apply.</strong></p>
-            <a href="jobs.html" class="index-button">Job Details</a>
+            <a href="jobs.php" class="index-button">Job Details</a>
             <h4 class="last-title">Together, we can create a safer digital world for everyone.</h4>
         </section>
         <?php
