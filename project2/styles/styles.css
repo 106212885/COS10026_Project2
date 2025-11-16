@@ -213,7 +213,7 @@ header {
 body {
     font-family: "Arial", sans-serif;
     background-image:url("images/background6.jpeg");
-    background-size: 100%;
+    background-size: 110%;
     background-repeat: repeat-y; /* repeat vertically */
 }
 
@@ -806,7 +806,6 @@ textarea {
     background-color: #45daff;  /* highlight on hover */
 }
 
-/* MANAGE.PHP */
 .manage-title {
     display: block;
     text-align: center;
