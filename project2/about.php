@@ -276,4 +276,8 @@ include 'nav.inc';
 
 <?php
 include("footer.inc");
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 0df91b28b3b05fc36d2995c4249129beb61dc1e0

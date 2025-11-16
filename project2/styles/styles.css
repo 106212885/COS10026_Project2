@@ -212,7 +212,11 @@ header {
 /*------ Background images ------*/
 .background-image {
     font-family: "Arial", sans-serif;
+<<<<<<< HEAD
     background-image: url("styles/images/background6.jpeg");
+=======
+    background-image:url("images/background6.jpeg");
+>>>>>>> 0df91b28b3b05fc36d2995c4249129beb61dc1e0
     background-size: 100%;
     background-repeat: repeat-y; /* repeat vertically */
 }
