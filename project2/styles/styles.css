@@ -212,7 +212,7 @@ header {
 /*------ Background images ------*/
 body {
     font-family: "Arial", sans-serif;
-    background-image:url("styles/images/background6.jpeg");
+    background-image:url("images/background6.jpeg");
     background-size: 100%;
     background-repeat: repeat-y; /* repeat vertically */
 }
@@ -596,7 +596,7 @@ textarea {
 
 /* -------- Group Members -------- */
 .group-members {
-    display: block;        /* no grid */
+    display: block;        
     width: 60%;
     margin: 2%;
     padding: 2%;
