@@ -10,18 +10,15 @@ if ($conn->connect_error) {
 
 $error = "";
 
-// Initialize attempt counter
 if (!isset($_SESSION['errorAttempt'])) {
     $_SESSION['errorAttempt'] = 0;
 }
 
-// If lockout expired, reset attempts
 if (isset($_SESSION['lockout_time']) && time() >= $_SESSION['lockout_time']) {
     unset($_SESSION['lockout_time']);
     $_SESSION['errorAttempt'] = 0;
 }
 
-// If still locked out
 if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     $remaining = $_SESSION['lockout_time'] - time();
     $error = "Too many failed attempts. Please wait {$remaining} seconds before trying again.";
@@ -39,7 +36,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
         $stmt->fetch();
 
         if (password_verify($password, $hashed_password)) {
-            // Success: reset attempts and lockout
             $_SESSION['errorAttempt'] = 0;
             unset($_SESSION['lockout_time']);
 
@@ -58,9 +54,8 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
 
     $stmt->close();
 
-    // If 3 or more failed attempts, set lockout
     if ($_SESSION['errorAttempt'] >= 3) {
-        $_SESSION['lockout_time'] = time() + 30; // 30 seconds lockout
+        $_SESSION['lockout_time'] = time() + 30;
         $error = "Too many failed attempts. Please wait 30 seconds before trying again.";
     }
 }
@@ -72,7 +67,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
 
 <?php include_once("nav.inc"); ?>
 
-<form class="form-box" method="post">
+<form class="form-box" method="post"> <!--form for login-->
     <h1 class="form-title">Login</h1>
     <label class="form-label">Username:</label><br>
     <input type="text" name="username" required><br><br>
@@ -80,7 +75,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     <label class="form-label">Password:</label><br>
     <input type="password" name="password" required><br><br>
 
-    <?php
+    <?php //If there is error message, display the error.
     if ($error) {
         echo '<p class="error">' . $error . '</p>';
     }

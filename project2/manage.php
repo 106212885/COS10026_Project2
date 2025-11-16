@@ -5,13 +5,13 @@ session_start();
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: login.php"); //redirect if logging out
     exit();
 }
 
 // 2. Checking if the admin is set.
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: login.php"); //redirect if username is not set
     exit();
 }
 else{
@@ -23,7 +23,6 @@ else{
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // 3.1 enhancements: Check whether username and password is correct.
     $stmt = $conn->prepare("SELECT password FROM admins WHERE username = ?");
     $stmt->bind_param("s", $_SESSION['username']);
     $stmt->execute();
@@ -55,43 +54,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 4.1 Delete EOIs by JobRefNo
     if (!empty($_POST['delete_jobrefno'])) {
-        $jobref = $_POST['delete_jobrefno'];
-        $stmt = $conn->prepare("DELETE FROM eoi WHERE JobRefNo = ?");
-        $stmt->bind_param("s", $jobref);
+        $jobref = $_POST['delete_jobrefno']; //Check which jobrefno to delete
+        $stmt = $conn->prepare("DELETE FROM eoi WHERE JobRefNo = ?"); //Prepare delete query
+        $stmt->bind_param("s", $jobref); //Delete based on jobrefno
         $stmt->execute();
-        echo "<p>Deleted EOIs for JobRefNo: " . $jobref . "</p>";
+        echo "<p>Deleted EOIs for JobRefNo: " . $jobref . "</p>"; //Deletion complete message
         $stmt->close();
     }
 
     // 4.2 Update EOI status by Email
     if (!empty($_POST['update_status_email']) && isset($_POST['new_status']) && $_POST['new_status'] !== "") {
-        $email = $_POST['update_status_email'];
-        $status = $_POST['new_status'];
-        $stmt = $conn->prepare("UPDATE eoi SET Status = ? WHERE Email = ?");
-        $stmt->bind_param("ss", $status, $email);
-        $stmt->execute();
+        $email = $_POST['update_status_email']; //Set email to the posted email
+        $status = $_POST['new_status']; //Set status based on the new status that is being assigned
+        $stmt = $conn->prepare("UPDATE eoi SET Status = ? WHERE Email = ?"); //Prepare the query
+        $stmt->bind_param("ss", $status, $email); //Set the values in place
+        $stmt->execute(); //Execute the query
 
-        echo "<p>Updated status for applicant with email: " . $email . "</p>";
-        echo "<p>Rows updated: " . $stmt->affected_rows . "</p>";
+        echo "<p>Updated status for applicant with email: " . $email . "</p>"; //Showcase the applicant's email whose status changed.
+        echo "<p>Rows updated: " . $stmt->affected_rows . "</p>"; //Show affected row
 
         $stmt->close();
-    } elseif (isset($_POST['new_status']) && $_POST['new_status'] === "") {
-        echo "<p style='color:red;'>Please select a valid status.</p>";
+    } elseif (isset($_POST['new_status']) && $_POST['new_status'] === "") { //If no status has been chosen specifically yet.
+        echo "<p>Please select a valid status.</p>"; //Showcase message to select status
     }
 }
 
 // 5. Display EOIs in a table
-function displayEOITable($result) {
+function displayEOITable($result) { //Function to display the table based on queries
     if ($result->num_rows > 0) {
         echo "<table border='1' cellpadding='5' cellspacing='0'>";
         echo "<tr>
-                <th>JobRefNo</th><th>FirstName</th><th>LastName</th>
+                <th>EOINo</th><th>JobRefNo</th><th>FirstName</th><th>LastName</th>
                 <th>StreetAddress</th><th>Suburb</th><th>State</th><th>Postcode</th>
                 <th>Email</th><th>Phone</th><th>Skills</th><th>OtherSkills</th><th>Status</th>
               </tr>";
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
+            echo "<td>" . $row['EOInumber'] . "</td>";
             echo "<td>" . $row['JobRefNo'] . "</td>";
             echo "<td>" . $row['FirstName'] . "</td>";
             echo "<td>" . $row['LastName'] . "</td>";
@@ -111,7 +111,7 @@ function displayEOITable($result) {
 
         echo "</table>";
     } else {
-        echo "<p>No results found.</p>";
+        echo "<p>No results found.</p>"; //If no data is inside table, show no results.
     }
 }
 ?>
@@ -123,36 +123,51 @@ function displayEOITable($result) {
 
     <?php include_once("nav.inc"); ?>
 
-    <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+    <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1> <!-- Welcome the user -->
 
     <!-- Logout Button -->
     <form method="post">
         <input type="submit" name="logout" value="Logout">
     </form>
 
-    <section class="manage-title">
-    <h2>List All EOIs</h2>
-    <?php
-    $result = $conn->query("SELECT * FROM eoi");
-    displayEOITable($result);
-    ?>
+    <section class="manage-title"> <!-- Partition the entire managing form area -->
 
-    <h2>Search EOIs by JobRefNo</h2>
-    <form class = "form-box" method="get">
-        <input type="text" name="jobref_search" placeholder="JobRefNo">
-        <input type="submit" value="Search">
-    </form>
     <?php
-    if (!empty($_GET['jobref_search'])) {
-        $jobref = $_GET['jobref_search'];
-        $stmt = $conn->prepare("SELECT * FROM eoi WHERE JobRefNo = ?");
-        $stmt->bind_param("s", $jobref);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        displayEOITable($result);
-        $stmt->close();
+
+    $query = "SELECT * FROM eoi";
+
+    if (!empty($_GET['sort_field'])) {
+    
+        $allowed = ["EOInumber", "JobRefNo", "FirstName", "LastName", "Email", "Status"];
+        $sortField = $_GET['sort_field'];
+
+        if (in_array($sortField, $allowed, true)) {
+            $query .= " ORDER BY $sortField ASC";
+        }
+    }
+
+    $result = $conn->query($query);
+    if ($result === false) {
+        echo "<p class='error'>Query error: " . $conn->error . "</p>";
+    } else {
+    displayEOITable($result);
+    $result->free();
     }
     ?>
+    <h2>List All EOIs</h2>
+    <form class="form-box" method="get" action="manage.php">
+        <label for="sort_field">Sort by:</label>
+        <select name="sort_field" id="sort_field">
+            <option value="">-- Select Field --</option>
+            <option value="EOInumber">EOINo</option>
+            <option value="JobRefNo">JobRefNo</option>
+            <option value="FirstName">First Name</option>
+            <option value="LastName">Last Name</option>
+            <option value="Email">Email</option>
+            <option value="Status">Status</option>
+        </select>
+        <input type="submit" value="Sort">
+    </form>
 
     <h2>Search EOIs by Applicant Name</h2>
     <form class="form-box" method="get">
@@ -161,7 +176,7 @@ function displayEOITable($result) {
         <input type="submit" value="Search">
     </form>
     <?php
-    if (!empty($_GET['fname']) || !empty($_GET['lname'])) {
+    if (!empty($_GET['fname']) || !empty($_GET['lname'])) { //using firstname or lastname check
         $query = "SELECT * FROM eoi WHERE ";
         $params = [];
         $types = "";
