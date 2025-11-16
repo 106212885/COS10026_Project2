@@ -587,13 +587,13 @@ textarea {
 
 /* -------- Group Name -------- */
 .group-name h2 {
-    color: white !important;   /* force the Group Name heading to white */
+    color: white;   /* force the Group Name heading to white */
 }
 
 /* -------- Group Introduction -------- */
 .group-introduction h2,
 .group-introduction p {
-    color: white !important;   /* force heading and paragraph text to white */
+    color: white;   /* force heading and paragraph text to white */
 }
 
 /* -------- Section Layout -------- */
@@ -825,4 +825,15 @@ textarea {
     color: white;
     font-weight: 500;
     margin-bottom: 3em; 
+}
+
+.eoi-table {
+    border: 1px solid white;
+    border-collapse: collapse;
+    color: white;
+}
+
+.eoi-table th, .eoi-table td {
+    border: 1px solid white;
+    padding: 5px;
 }
