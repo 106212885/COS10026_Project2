@@ -596,23 +596,20 @@ textarea {
 
 /* -------- Group Members -------- */
 .group-members {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    text-align: right; 
-    float: right;
+    display: block;        /* no grid */
     width: 60%;
-    max-width: 60%;
     margin: 2%;
     padding: 2%;
     background: #dcf2ff;
-    background-size: 15%;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgb(128, 128, 128);
 }
 
 .group-members h2 {
-    text-align: left;
+    text-align: center;    /* center heading inside the box */
+    margin-bottom: 15px;
 }
+
 
 .group-members ul {
     list-style-type: none;
@@ -622,7 +619,7 @@ textarea {
 .group-members li {
     display: flex;
     justify-content: space-between;
-    font-size: 1em;
+    font-size: 1.3em;
     margin-top: 80px;
     margin-bottom: 20px;
     text-align: left;
@@ -642,39 +639,40 @@ textarea {
 }
 /* -------- Group Photo -------- */
 .group-photo {
-    max-width: 80%;
-    margin: 1.2% 2%;
-    padding: 1em 1em;
-    padding-right: 13%;
+    max-width: 80%;             /* scales with screen width */
+    margin: 2% auto;            /* % margin centers and scales */
+    padding: 2em;               /* em padding scales with font size */
     background: #dcf2ff;
-    background-size: 15%;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px gray;
+    border-radius: 1em;         /* em-based rounding */
+    box-shadow: 0 0.4em 1em gray;
+    text-align: center;         /* center heading + image + caption */
 }
+
 .group-photo h2 {
-    float: right;   
-    width: 45%; /* adjust width to fit nicely with image */
+    margin: 0 0 1em 0;          /* em spacing below heading */
+    font-size: 2em;             /* scales with root font size */
+    text-align: center;
 }
 
-.about-page figure {
-    float: right;          /* align to right */
-    max-width: 70%;         /* limit max width */
+.group-photo figure {
+    margin: 0 auto;
+    max-width: 100%;
 }
 
-.about-page figure img {
-    border: 3px solid #000080;  /* shorthand border with hex navy */
-    border-radius: 8px;
+.group-photo img {
+    border: 0.2em solid #000080;
+    border-radius: 0.5em;
     display: block;
-    width: 145%;
-    height: auto;
+    max-width: 100%;            /* prevents overflow */
+    height: auto;               /* keeps aspect ratio */
 }
 
 .group-photo figcaption {
     text-align: center;
     font-style: italic;
-    margin-top: 8px;
+    margin: 0.8em 0;            /* em spacing above/below caption */
     font-size: 1.2em;
-    color: #000000; /* hex gray */
+    color: #000;
 }
 
 /* -------- Contributions -------- */
