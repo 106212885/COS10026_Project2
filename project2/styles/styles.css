@@ -148,7 +148,7 @@ description: [index.html, jobs.html, apply.html, about.html]
     text-align: center;
     margin: 3% auto; /* centers horizontally */
     padding: 1% 2%;
-    background:url(styles/images/fade.jpg);
+    background:url("images/fade.jpg");
     color: black;
     border: none;
     border-radius: 10px;
@@ -160,7 +160,7 @@ description: [index.html, jobs.html, apply.html, about.html]
 
 
 .index-button:hover /*when cursor move, it changed color*/ {
-    background:url(styles/images/fade2.jpg);
+    background:url("images/fade2.jpg");
     background-size: cover;
 }
 
