@@ -585,6 +585,17 @@ textarea {
    max-width: 1000px;
 }
 
+/* -------- Group Name -------- */
+.group-name h2 {
+    color: white !important;   /* force the Group Name heading to white */
+}
+
+/* -------- Group Introduction -------- */
+.group-introduction h2,
+.group-introduction p {
+    color: white !important;   /* force heading and paragraph text to white */
+}
+
 /* -------- Section Layout -------- */
 .about-page section {
     display: flex;

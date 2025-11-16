@@ -5,7 +5,6 @@ include 'header.inc';
 <?php
 include 'nav.inc';
 ?>
-<link rel="stylesheet" href="about.css">
 
 
 <main class="about-page">
