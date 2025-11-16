@@ -43,10 +43,13 @@
                 global $form_data;
                 return (isset($form_data[$field]) && $form_data[$field] === $value) ? 'selected' : '';
             }
-
+            
             include 'header.inc';
+            ?>
+            <h1>Job Applications</h1>
+            <?php
             include 'nav.inc';
-        ?>
+            ?>
 
         <!-- Job Application Form -->
         <form class="form-box" method="post" action="process_eoi.php" novalidate="novalidate">
