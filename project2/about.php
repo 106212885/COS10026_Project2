@@ -1,5 +1,8 @@
 <?php
 include 'header.inc';
+?>
+<h1>About Us</h1>
+<?php
 include 'nav.inc';
 ?>
 <link rel="stylesheet" href="about.css">
