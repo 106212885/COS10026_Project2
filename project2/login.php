@@ -9,6 +9,7 @@ if ($conn->connect_error) {
 }
 
 $error = "";
+
 // 2. Sanitize input and check for relation to database's username and password
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
@@ -18,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
+
     // 2.1 Using hashed password for enhanced security
     if ($stmt->num_rows === 1) {
         $stmt->bind_result($hashed_password);
@@ -25,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $hashed_password)) {
             $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
             header("Location: manage.php");
             exit();
         } else {
@@ -38,29 +41,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Login</title>
-</head>
-<body>
-    <?php include_once("header.inc");
-    include_once("nav.inc");
-    ?>
-    <h2>Login</h2>
+    <?php include_once("header.inc"); ?>
+
+    <h1>Login</h1>
+
+    <?php include_once("nav.inc"); ?>
+
     <?php if ($error): ?>
-        <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
+        <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
-    <form method="post">
-        <label>Username:</label><br>
+
+    <form class="form-box" method="post">
+        <label class="form-label">Username:</label><br>
         <input type="text" name="username" required><br><br>
 
-        <label>Password:</label><br>
+        <label class="form-label">Password:</label><br>
         <input type="password" name="password" required><br><br>
 
-        <input type="submit" value="Login">
+        <input class="form-button" type="submit" value="Login">
     </form>
-    <?php include_once("footer.inc");
-    ?>
+
+    <?php include_once("footer.inc"); ?>
+
 </body>
 </html>

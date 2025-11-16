@@ -4,6 +4,7 @@ include 'nav.inc';
 require_once('settings.php');
 ?>
 
+<body class="body-background">
 <!--Animation - SPAN function-->
 <section class="job-positions">
 <h2>
@@ -109,9 +110,8 @@ require_once('settings.php');
             <li><a href="#itsupport-specialist">IT Support Specialist/ IT Manager</a></li>
         </ul>
     <p><strong>Submit your CV</strong></p>
-    <a href="apply.html">Application Form</a>
+    <a href="apply.php">Application Form</a>
 </aside>
-</body>
 
 <?php
 // connects my sql database
@@ -131,7 +131,6 @@ if (!$conn) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "
             <section id='" . $row['ref_id'] . "'>
-              <h2>" . $row['title'] . "</h2>
               <dl class='job-details'>
                 <dt>
                   <strong>" . $row['title'] . "</strong>";
@@ -173,7 +172,6 @@ if (!$conn) {
 
     mysqli_close($conn);
 }
-
 ?>
 
 <!--Animation - Closing Lines-->
