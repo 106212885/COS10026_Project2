@@ -41,8 +41,11 @@
     }
 
     include 'header.inc';
+    ?>
+    <h1>Job Application</h1>
+    <?php
     include 'nav.inc';
-?>
+    ?>
 
 <!-- Job Application Form -->
 <form class="form-box" method="post" action="process_eoi.php" novalidate="novalidate">
