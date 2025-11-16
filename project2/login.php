@@ -47,17 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php include_once("nav.inc"); ?>
 
-    <?php if ($error): ?>
-        <p class="error"><?php echo $error; ?></p>
-    <?php endif; ?>
-
     <form class="form-box" method="post">
+        <h1 class="form-title">Login</h1>
         <label class="form-label">Username:</label><br>
         <input type="text" name="username" required><br><br>
 
         <label class="form-label">Password:</label><br>
         <input type="password" name="password" required><br><br>
-
+        <?php if ($error): ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php endif; ?>
         <input class="form-button" type="submit" value="Login">
     </form>
 
@@ -65,7 +64,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
-<<<<<<< HEAD
-=======
 
->>>>>>> 088b8c7acb4b2a949754a4ea27adf13a7ee080d0
