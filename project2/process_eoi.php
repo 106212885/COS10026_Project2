@@ -58,8 +58,7 @@ try {
 function sanitize_input(string $raw_input): string {
     $cleaned_input = trim($raw_input);
     $cleaned_input = stripslashes($cleaned_input);
-    $cleaned_input = htmlspecialchars($cleaned_input, ENT_QUOTES, 'UTF-8');
-    return $cleaned_input;
+    return filter_var($cleaned_input, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 }
 
 // Validate Australian postcode for state
