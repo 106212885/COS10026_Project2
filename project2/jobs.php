@@ -1,10 +1,14 @@
 <?php
 include 'header.inc';
+?>
+
+<h1>Job Positions</h1>
+
+<?php
 include 'nav.inc';
 require_once('settings.php');
 ?>
 
-<body class="body-background">
 <!--Animation - SPAN function-->
 <section class="job-positions">
 <h2>
@@ -17,7 +21,6 @@ require_once('settings.php');
         <span>IT SUPPORT SPECIALIST</span>
     </span>
 </h2>
-</section>
 
 <!--Intro - Image slides-->
 <main class="slider-track">
