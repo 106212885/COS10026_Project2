@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // 5. Display EOIs in a table
 function displayEOITable($result) { //Function to display the table based on queries
     if ($result->num_rows > 0) {
-        echo "<table border='1' cellpadding='5' cellspacing='0'>";
+        echo "<table class='eoi-table' border='1' cellpadding='5' cellspacing='0'>";
         echo "<tr>
                 <th>EOINo</th><th>JobRefNo</th><th>FirstName</th><th>LastName</th>
                 <th>StreetAddress</th><th>Suburb</th><th>State</th><th>Postcode</th>
@@ -117,7 +117,7 @@ function displayEOITable($result) { //Function to display the table based on que
 ?>
 
 
- <?php include_once("header.inc"); ?>
+ <?php include("header.inc"); ?>
 
     <h1>Manage</h1>
 
